@@ -17,8 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from article.views import index, about
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('about/', about, name="about"),
+    # path('detail/<int:id>', detail, name="detail"),
+    path('article/', include("article.urls")),
+    path('user/', include("user.urls")),
+    
 ]

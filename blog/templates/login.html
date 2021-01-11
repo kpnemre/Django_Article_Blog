@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+    <h3>Login</h3>
+    <hr>
+    <form action="" method="POST">
+{% csrf_token %}
+{{form.as_ul}}
+<br>
+<button type="submit" class="btn btn-danger">Log in</button>
+
+    </form>
+{% endblock body %}
