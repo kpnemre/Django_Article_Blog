@@ -37,3 +37,12 @@ def addArticle(request):
         'form':form
     }
     return render(request, 'addarticle.html', context)
+
+def detail(request,id):
+    article = Article.objects.filter(id=id).first()
+    # print(article)
+    context= {
+        'article':article
+    }
+    return render(request, 'detail.html', context)
+    

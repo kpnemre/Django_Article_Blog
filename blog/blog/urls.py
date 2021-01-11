@@ -23,7 +23,7 @@ urlpatterns = [
     path('', index, name="index"),
     path('about/', about, name="about"),
     # path('detail/<int:id>', detail, name="detail"),
-    path('article/', include("article.urls")),
+    path('articles/', include("article.urls")),
     path('user/', include("user.urls")),
     
 ]
