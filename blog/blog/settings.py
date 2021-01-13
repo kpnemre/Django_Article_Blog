@@ -130,4 +130,12 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'removePlugins':"stylesheetparser",
+        # 'allowedcontent':True yazamsan da çalışıyor
+        'width':"100%"
+    }
+}
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

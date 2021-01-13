@@ -6,9 +6,10 @@
   <div class="col-md-6 offset-md-3">
     <h3>Create an Article</h3>
     <hr />
-
-    <form action="" method="POST">
-      {% csrf_token %} {{form |crispy}}
+    <form action="" method="POST">      
+      {% csrf_token %}
+    {{ form.media }}
+    {{form |crispy}}
       <br />
       <button type="submit" class="btn btn-danger">Create</button>
     </form>
