@@ -75,4 +75,11 @@ def delete(request,id):
     messages.success(request, "Article is deleted successfully..")
     return redirect("article:dashboard")
     
-    
+@login_required(login_url='user:login')   
+def articles(request):
+    articles =Article.objects.all()  
+    print(type(articles))
+    context={
+        'articles':articles
+    }
+    return render(request, "articles.html",context)

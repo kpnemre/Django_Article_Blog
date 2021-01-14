@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} {% load crispy_forms_tags %} {% block body %}
+<div class="row" >
+  
+  <div class="col-md-10 offset-md  m-3" >
+    <h2>Articles</h2>
+  </div>
+</div>
+
+{% if articles %} 
+{% for article in articles %}
+<div class="row">
+  <div class="col-md-10 offset-md-3">
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+      <!-- Title -->
+      <a href="article/{{article.id}}"><h2 class="mt-4">{{article.title}}</h2></a>
+
+      <!-- Author -->
+      <p class="lead">
+       written by
+        <a href="#">{{user.username}}</a>
+        <!-- <a href="#">{{article.author.username}}</a> -->
+      </p>
+
+      <hr />
+
+      <!-- Date/Time -->
+      <p>{{article.created_date}}</p>
+
+      <hr />
+
+      <!-- Preview Image -->
+
+      {% if article.article_image %}
+      <img
+        class="img-fluid rounded"
+        src="{{article.article_image.url}}"
+        alt=""
+      />
+
+      {% endif %}
+      <hr />
+      <div class="row">
+      <div class="col-md-10 ">
+      <p class="lead">{{article.content | safe}}</p>
+    </div>
+</div>
+      <hr />
+    </div>
+
+    <!-- Sidebar Widgets Column -->
+  </div>
+</div>
+{% endfor %} {% else %}
+<div class="alert alert-danger"><p>There is no article yet</p></div>
+{% endif %} {% endblock body %}
