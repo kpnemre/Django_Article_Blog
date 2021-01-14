@@ -11,7 +11,7 @@ class Article(models.Model):
     # content= models.TextField(verbose_name="İçerik")
     content= RichTextField(verbose_name="İçerik")
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturma zamanı")
-    article_image = models.FileField(blank=True,null=True, verbose_name="Makaleye Resim ekle")
+    article_image = models.FileField(blank=True,null=True, verbose_name="Add an image")
     
     def __str__(self):
         return self.title
