@@ -25,12 +25,12 @@
       <td>{{article.author.username}}</td>
       <td>{{article.created_date}}</td>
       <td>
-        <a href="{% url 'article:update' article.id %}" class="btn btn-danger"
+        <a href="{% url 'article:update' article.id %}" class="btn btn-primary"
           >Update</a
         >
       </td>
       <td>
-        <a href="{% url 'article:delete' article.id %}" class="btn btn-danger"
+        <a href="{% url 'article:delete' article.id %}" class="btn btn-primary"
           >Delete</a
         >
       </td>
@@ -48,7 +48,7 @@ There is no article
 <!-- <p>
         Welcome, <small>{{request.user.username}}</small>
     </p> -->
-<a type="submit" class="btn btn-danger" href="{% url 'article:addarticle' %}"
+<a type="submit" class="btn btn-primary" href="{% url 'article:addarticle' %}"
   >Add Article</a
 >
 {% endblock body %}
