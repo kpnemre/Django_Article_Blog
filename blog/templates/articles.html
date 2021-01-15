@@ -1,23 +1,46 @@
 {% extends 'layout.html' %} {% load crispy_forms_tags %} {% block body %}
-<div class="row" >
-  
-  <div class="col-md-10 offset-md  m-3" >
+<div class="row">
+  <div class="col-md-10 offset-md">
     <h2>Articles</h2>
   </div>
 </div>
-
-{% if articles %} 
-{% for article in articles %}
 <div class="row">
   <div class="col-md-10 offset-md-3">
+<div class="col-lg-8">
+  <form class="form-inline my-2 my-lg-0" method="GET">
+    {% csrf_token %}
+
+    <input
+      class="form-control mr-sm-2"
+      name="keyword"
+      type="text"
+      placeholder="Search"
+      aria-label="Search"
+    />
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+      Search
+    </button>
+  </form>
+  <br>
+</div>
+</div>
+</div>
+
+{% if articles %} {% for article in articles %}
+<div class="row">
+  <div class="col-md-10 offset-md-3">
+
+
     <!-- Post Content Column -->
     <div class="col-lg-8">
       <!-- Title -->
-      <a href="article/{{article.id}}"><h2 class="mt-4">{{article.title}}</h2></a>
+      <a href="article/{{article.id}}"
+        ><h2 class="mt-4">{{article.title}}</h2></a
+      >
 
       <!-- Author -->
       <p class="lead">
-       written by
+        written by
         <a href="#">{{user.username}}</a>
         <!-- <a href="#">{{article.author.username}}</a> -->
       </p>
@@ -41,16 +64,27 @@
       {% endif %}
       <hr />
       <div class="row">
-      <div class="col-md-10 ">
-      <p class="lead">{{article.content | safe}}</p>
-    </div>
-</div>
+        <div class="col-md-10">
+          <!-- <p class="lead">{{article.content | safe}}</p> -->
+          <p class="lead">{{article.content | safe | truncatewords:20}}</p>
+          <a style="float: right" href="{% url 'article:detail' article.id %}"
+          
+            >Continue reading</a
+          >
+        </div>
+      </div>
       <hr />
     </div>
 
     <!-- Sidebar Widgets Column -->
   </div>
+
+  <div class="row">
+    {% endfor %} {% else %}
+    <div class="alert alert-danger col-md-6"><p>There is no article yet</p></div>
+
+    {% endif %} {% endblock body %}
+  </div>
 </div>
-{% endfor %} {% else %}
-<div class="alert alert-danger"><p>There is no article yet</p></div>
-{% endif %} {% endblock body %}
+
+</div>

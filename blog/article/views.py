@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .forms import ArticleForm
 from django.contrib import messages
 from .models import Article
+# from .models import Comment
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
@@ -77,6 +78,11 @@ def delete(request,id):
     
 @login_required(login_url='user:login')   
 def articles(request):
+    keyword =request.GET.get("keyword")
+    if keyword:
+        articles= Article.objects.filter(title__contains=keyword)
+        return render(request, "articles.html", {"articles":articles})
+        
     articles =Article.objects.all()  
     print(type(articles))
     context={
