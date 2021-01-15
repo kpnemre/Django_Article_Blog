@@ -30,26 +30,51 @@
       <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">
        
      {% endif %}
-        
-   
-  
-        
-
       <hr>
-
       <!-- Post Content -->
       <!-- <p class="lead">{{article.content}}</p> -->
       <p class="lead">{{article.content | safe}}</p>
-
-  
-      <hr>
-
       <!-- Comments Form -->
+    <!-- Single Comment -->  
+    <hr>
+<h4>Comments:</h4>
+<br>
+{% if comments %}
+
+{% for comment in comments %}
+<div class="media mb-4">
+  <img class="d-flex mr-3 rounded-circle" style="width: 3rem;height:3rem;" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+  <div class="media-body">
+    <h5 class="mt-0">{{comment.comment_author}}</h5>
+    <p>{{comment.comment_created_date}}</p>
+    <p>{{comment.comment_content}}</p>
+  </div>
+</div>
+{% endfor %}
   
 
-      <!-- Single Comment -->
+{% else %}
+<div class="alert alert-danger">
+  <p>There is no comment for this article. Become first to write comment..</p>
+</div>
 
+{% endif %}
 
+      <div class="card-body">
+      <form action="{% url 'article:comment' article.id %}" method="POST" >
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input name="comment_author" type="text" class="form-control" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="comment">Your Comment</label>
+          <textarea name="comment_content" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+    </div>
+  
       <!-- Comment with nested comments -->
 
 

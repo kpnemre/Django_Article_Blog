@@ -18,13 +18,18 @@ class Article(models.Model):
         return self.title
         # return self.author
     # makalenin başlığı ile gözükmesini sağlar
-    
+    class Meta:
+        ordering=['-created_date']
 class Comment(models.Model):
     article=models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="Comment", related_name="comment")
     comment_author = models.CharField(max_length=50, verbose_name="Author")
     comment_content = models.CharField(max_length=200, verbose_name="Content")
     comment_created_date = models.DateTimeField(auto_now_add=True, verbose_name="Created time")
     
-        
+    def __str__(self):
+        return self.comment_content
+    
+    class Meta:
+        ordering=['-comment_created_date']   
     
     

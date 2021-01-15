@@ -1,8 +1,8 @@
-from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404,reverse
 from .forms import ArticleForm
 from django.contrib import messages
 from .models import Article
-# from .models import Comment
+from .models import Comment
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
@@ -45,9 +45,11 @@ def addArticle(request):
 def detail(request,id):
     # article = Article.objects.filter(id=id).first()
     article = get_object_or_404(Article, id=id)
+    comments= article.comment.all()
     # print(article)
     context= {
-        'article':article
+        'article':article,
+        'comments':comments
     }
     return render(request, 'detail.html', context)
 
@@ -89,3 +91,20 @@ def articles(request):
         'articles':articles
     }
     return render(request, "articles.html",context)
+
+def comment(request,id):
+    article = get_object_or_404(Article, id=id)
+    if request.method =="POST":
+        comment_author= request.POST.get("comment_author") #html deki input name den alıyoruz
+        comment_content=request.POST.get("comment_content")
+        
+        newCommment =Comment( comment_author=comment_author,comment_content= comment_content)
+        newCommment.article=article # comment modelindeki article içine yukarıdaki article ı ekledik
+        # print(newCommment)
+        newCommment.save()
+        # return redirect("article/article/"+ str(id))
+    return redirect(reverse("article:detail",kwargs={'id':id}))
+        
+    
+    
+    
