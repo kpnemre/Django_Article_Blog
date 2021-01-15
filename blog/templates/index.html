@@ -9,11 +9,16 @@
     </div>
     <p>
     
-
 {% if request.user.is_authenticated %}
-    Giriş yapıldı {{request.user.username}}
+<div class="alert alert-success" role="alert">
+    Logged In by  {{request.user.username}}
+  </div>
+
+   
 {% else %}
-    yapılmadı
+<div class="alert alert-danger " role="alert">
+    Please Login in ...
+  </div>
 {% endif %}
     
         
